@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/vendor/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row header">
+			<div class="col-md-12">
+				<h1 class="text-center">JEAN - WIKI</h1>
+			</div>	
+		</div>
+		{% block content %}
+		{% endblock %}
+
+		<div class="row header">
+			<div class="col-md-12">
+				<h2>Coded By Jean Ure&ntilde;a</h2>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

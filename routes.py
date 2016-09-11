@@ -2,4 +2,6 @@
 
 # importing handlers
 from handlers import *
-route_list = [('/', main_handler.MainHandler)]
+route_list = [('/', main_handler.MainHandler),
+			  ("/login", login_handler.LoginHandler),
+			  ("/signup", signup_handler.SignupHandler)]
