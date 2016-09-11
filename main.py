@@ -15,11 +15,12 @@
 # limitations under the License.
 #
 import webapp2
+# importing routlist
+from routes import route_list
 
-class MainHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.write('Hello world!')
+# class MainHandler(webapp2.RequestHandler):
+#     def get(self):
+#         self.response.write('Hello world!')
 
-app = webapp2.WSGIApplication([
-    ('/', MainHandler)
-], debug=True)
+app = webapp2.WSGIApplication(route_list
+, debug=True)
