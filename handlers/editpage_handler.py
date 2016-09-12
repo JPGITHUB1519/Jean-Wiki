@@ -1,5 +1,6 @@
 from basic_handler import *
 from models.wiki_post import WikiPost
+from models.wiki_post_version import WikiPostVersion
 from google.appengine.ext import db
 
 class EditPageHandler(Handler) :
@@ -16,16 +17,23 @@ class EditPageHandler(Handler) :
 		post = self.request.get("wikipost")
 		# get the first post maching
 		postobj = WikiPost.query(ancestor = ancestor_key).filter(WikiPost.url == url).get()
-		# if  the post exist update it!
+		# if the post exist update it!
 		if postobj :
+			#updating post
 			postobj.content = post
 			postobj.put()
+			# adding a new version of the post
+			post_versionobj = WikiPostVersion(r_post = postobj.key, content = post)
+			post_versionobj.put()
 			self.redirect(url)	
 		else :
 			# if the post do not exit saving post in database
 			post = self.request.get("wikipost")
 			postobj = WikiPost(parent = ancestor_key, url = url, content = post)
 			postobj.put()
+			# adding a new version of the post
+			post_versionobj = WikiPostVersion(r_post = postobj.key, content = post)
+			post_versionobj.put()
 			# redirecting post to the page
 			self.redirect(url)
 			
