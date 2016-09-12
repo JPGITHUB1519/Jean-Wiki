@@ -21,10 +21,12 @@ class EditPageHandler(Handler) :
 		if postobj :
 			#updating post
 			postobj.content = post
-			postobj.put()
 			# adding a new version of the post
 			post_versionobj = WikiPostVersion(r_post = postobj.key, content = post)
 			post_versionobj.put()
+			# adding new post
+			postobj.put()
+			
 			self.redirect(url)	
 		else :
 			# if the post do not exit saving post in database
@@ -32,7 +34,7 @@ class EditPageHandler(Handler) :
 			postobj = WikiPost(parent = ancestor_key, url = url, content = post)
 			postobj.put()
 			# adding a new version of the post
-			post_versionobj = WikiPostVersion(r_post = postobj.key, content = post)
+			post_versionobj = WikiPostVersion(parent = ancestor_key, r_post = postobj.key, content = post)
 			post_versionobj.put()
 			# redirecting post to the page
 			self.redirect(url)

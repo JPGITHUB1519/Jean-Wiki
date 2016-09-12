@@ -7,4 +7,17 @@
 			<h2>History</h2>
 		</div>
 	</div>
+	{% for vpost in list_version %}
+		<div class="row">
+			<div class="col-md-3">
+				{{ vpost.content }}
+			</div>
+			<div class="col-md-3">
+				{{ vpost.date }}
+			</div>
+			<div class="col-md-3">
+				<a href="{{url}}?v={{vpost.key.urlsafe()}}">View</a>
+			</div>
+		</div>
+	{% endfor %}
 {% endblock %}
