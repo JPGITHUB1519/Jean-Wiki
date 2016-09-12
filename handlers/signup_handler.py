@@ -44,11 +44,13 @@ class SignupHandler(Handler) :
 					error_email = "That's not a Valid Email"
 					cond_error = True
 		if cond_error == False :
+			# generating password hash
+			password = make_password_hash(username, password)
 			# creating a new instance of the object
 			user = User(username=username, password = password, email = email)
 			# saving data in the database
 			user.put()
-			self.write("Bienvenido")
+			self.login(user)
 		else :
 			self.render("signup.html",
 							error_username= error_username, 

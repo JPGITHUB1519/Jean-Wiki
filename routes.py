@@ -4,4 +4,6 @@
 from handlers import *
 route_list = [('/', main_handler.MainHandler),
 			  ("/login", login_handler.LoginHandler),
-			  ("/signup", signup_handler.SignupHandler)]
+			  ("/signup", signup_handler.SignupHandler),
+			  ("/logout", logout_handler.LogoutHandler),
+			  ("/welcome", welcome_handler.WelcomeHandler)]
