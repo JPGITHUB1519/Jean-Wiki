@@ -19,7 +19,8 @@
 	</div>
 	<div class="row">
 		<div class="col-md-12">
-			<p> {{ post }}</p>
+			<!-- disable autoscaping for enable html tags-->
+			<p>{{ post|safe}}</p>	
 		</div>
 	</div>
 	
