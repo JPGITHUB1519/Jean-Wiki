@@ -2,7 +2,16 @@
 {% block title %} WikiPage {% endblock %}
 
 {% block content %}
-	
+	<div class="row">
+		<div class="col-md-6 center-block text-center">
+			<!-- If the user is loggin it can edit -->
+			{% if access == True %}
+				<!-- Redirect to edit -->
+				<a href="/_edit{{ url }}" class="text-center" style="margin-right: 20px;">Edit This Post</a>
+				<a href="/logout">Log-Out</a>
+			{% endif %}
+		</div>
+	</div>
 	<div class="row">
 		<div class="col-md-12">
 			<h2>WikiPage</h2>
@@ -13,4 +22,6 @@
 			<p> {{ post }}</p>
 		</div>
 	</div>
+	
 {% endblock %}
+
