@@ -16,7 +16,7 @@ class WikiPageHandler(Handler) :
 			v_key = ndb.Key(urlsafe= v)
 			# converting key to id and getting value by id 
 			# if there is a version we assign the version to the post else assign post
-			post = WikiPostVersion.get_by_id(v_key.id())
+			post = WikiPostVersion.get_by_id(v_key.id(), parent = ancestor_key)
 		else :
 			# get post	
 			post = WikiPost.query(ancestor = ancestor_key).filter(WikiPost.url == url).get()
