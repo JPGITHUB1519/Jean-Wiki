@@ -13,9 +13,10 @@ class WikiPageHandler(Handler) :
 		if v :
 			# get version
 			# converting url to key
-			v = ndb.Key(urlsafe= v)
+			v_key = ndb.Key(urlsafe= v)
 			# converting key to id and getting value by id 
-			post = WikiPostVersion.get_by_id(v.id())
+			# if there is a version we assign the version to the post else assign post
+			post = WikiPostVersion.get_by_id(v_key.id())
 		else :
 			# get post	
 			post = WikiPost.query(ancestor = ancestor_key).filter(WikiPost.url == url).get()
@@ -23,9 +24,9 @@ class WikiPageHandler(Handler) :
 		if self.user :
 			# get url
 			if post :
-				# if version is, do not send url
+				# if version is, send version key on url
 				if v :
-					self.render("wikipage.html", post = post.content, access = True)
+					self.render("wikipage.html", post = post.content, url = post.r_post.get().url, access = True, version = v)
 				else :
 					# send url for edit if the user wants
 					# send access for know if the user is logged

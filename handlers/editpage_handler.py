@@ -6,7 +6,18 @@ from google.appengine.ext import db
 class EditPageHandler(Handler) :
 	# parameter url is for get in the url
 	def get(self, url) :
-		postobj = WikiPost.query(ancestor = ancestor_key).filter(WikiPost.url == url).get()
+		version = self.request.get("v")
+		# if the version exits edit the version content
+		if version :
+			# get version
+			# converting url to key
+			v_key = ndb.Key(urlsafe= version)
+			# converting key to id and getting value by id 
+			# if there is a version we assign the version to the post else assign post
+			postobj = WikiPostVersion.get_by_id(v_key.id())
+		else :
+			# if not exits version edit post
+			postobj = WikiPost.query(ancestor = ancestor_key).filter(WikiPost.url == url).get()
 		# if the post exits load the content of the post and assign it to the textarea
 		if postobj :
 			self.render("edit_page.html", post_value = postobj.content)

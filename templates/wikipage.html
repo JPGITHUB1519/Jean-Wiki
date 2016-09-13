@@ -7,7 +7,13 @@
 			<!-- If the user is loggin it can edit -->
 			{% if access == True %}
 				<!-- Redirect to edit -->
-				<a href="/_edit{{ url }}" class="text-center" style="margin-right: 20px;">Edit This Post</a>
+				<!-- if exists version, on edit edit version else edit post -->
+				{% if version %}
+					<a href="/_edit{{ url }}?v={{ version }}" class="text-center" style="margin-right: 20px;">Edit This Post</a>
+				{% else %}
+					<a href="/_edit{{ url }}" class="text-center" style="margin-right: 20px;">Edit This Post</a>
+				{% endif %}
+				<a href="/_history{{ url }}" class="text-center" style="margin-right: 20px;">History</a>
 				<a href="/logout">Log-Out</a>
 			{% endif %}
 		</div>
