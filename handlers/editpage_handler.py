@@ -23,9 +23,9 @@ class EditPageHandler(Handler) :
 			self.render("edit_page.html", post_value = postobj.content)
 		else :
 			self.render("edit_page.html")
-			
+
 	def post(self, url) :
-		post = self.request.get("wikipost")
+		post = self.request.get("content")
 		# get the first post maching
 		postobj = WikiPost.query(ancestor = ancestor_key).filter(WikiPost.url == url).get()
 		# if the post exist update it!
