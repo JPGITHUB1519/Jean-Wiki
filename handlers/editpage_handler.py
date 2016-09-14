@@ -2,6 +2,7 @@ from basic_handler import *
 from models.wiki_post import WikiPost
 from models.wiki_post_version import WikiPostVersion
 from google.appengine.ext import db
+from utility import *
 
 class EditPageHandler(Handler) :
 	# parameter url is for get in the url
