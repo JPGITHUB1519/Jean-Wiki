@@ -11,15 +11,10 @@ class WikiPageHandler(Handler) :
 		v = self.request.get("v")
 		# if the version is passed on the get parameter
 		if v :
-			# get version
-			# converting url to key
-			v_key = ndb.Key(urlsafe= v)
-			# converting key to id and getting value by id 
-			# if there is a version we assign the version to the post else assign post
-			post = WikiPostVersion.get_by_id(v_key.id(), parent = ancestor_key)
+			post = get_wiki_version(v)
 		else :
 			# get post	
-			post = WikiPost.query(ancestor = ancestor_key).filter(WikiPost.url == url).get()
+			post = get_wiki_post(url)
 		# if the user is logged
 		if self.user :
 			# get url
@@ -36,4 +31,8 @@ class WikiPageHandler(Handler) :
 				self.redirect('/_edit' + url)
 		else :
 			# if the user do not exits only see
-			self.render("wikipage.html", post = post.content, access = False)
+			if post : 
+				self.render("wikipage.html", post = post.content, access = False)
+			else :
+				#if the post do not exits, see the 404 page
+				self.render("404.html")

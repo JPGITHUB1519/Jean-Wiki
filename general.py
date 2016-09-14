@@ -37,20 +37,20 @@ def get_wiki_post(url, update = False) :
 		memcache.set(key, wiki_posts)
 	return wiki_posts
 
-# # I save the version in the cache with the sufix "v" + url(v/1)
-# def get_wiki_version(v, update = False) :
-# 	sufix = "v"
-# 	key = sufix + str(v)
-# 	# get version
-# 	# converting url to key
-# 	v_key = ndb.Key(urlsafe= v)
-# 	# converting key to id and getting value by id 
-# 	# if there is a version we assign the version to the post else assign post
-# 	wiki_version = memcache.get(key)
-# 	if not wiki_version or update :
-# 		logging.error("Single Version Query")
-# 		wiki_version = WikiPostVersion.get_by_id(v_key.id(), parent = ancestor_key)
-# 		memcache.set(key, WikiPost)
-# 	return wiki_version
+# I save the version in the cache with the sufix "v" + url(v/1)
+def get_wiki_version(v, update = False) :
+	sufix = "v"
+	key = sufix + str(v)
+	# get version
+	# converting url to key
+	v_key = ndb.Key(urlsafe= v)
+	# converting key to id and getting value by id 
+	# if there is a version we assign the version to the post else assign post
+	wiki_version = memcache.get(key)
+	if not wiki_version or update :
+		logging.error("Single Version Query")
+		wiki_version = WikiPostVersion.get_by_id(v_key.id(), parent = ancestor_key)
+		memcache.set(key, wiki_version)
+	return wiki_version
 
 

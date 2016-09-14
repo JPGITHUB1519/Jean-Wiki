@@ -1,6 +1,5 @@
 from wiki_post import WikiPost
 from google.appengine.ext import ndb
-from general import *
 
 class WikiPostVersion(ndb.Model) :
 	r_post = ndb.KeyProperty(kind = WikiPost)
