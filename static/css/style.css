@@ -32,40 +32,6 @@
 	margin: 0 auto
 }
 
-
-/* ==========================================================================
-   Responsive
-   ========================================================================== 
-*/
-
-
-@media only screen and (min-width: 600px) 
-{
-    /* For tablets: */
-
-    /* only-overrides */
-    .text-center-only-small
-    {
-    	text-align: initial;
-    }
-
-	.center-block-only-small
-	{
-		display: inline;
-	}
-
-}
-
-@media only screen and (min-width: 768px) 
-{
-    /* For desktop: */
-
-    /* center */
-    
-}
-
-
-
 .error
 {
 	color: #cc0000;
@@ -106,4 +72,35 @@
 .little-padding
 {
   padding: 0.5em;
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== 
+*/
+
+
+@media only screen and (min-width: 600px) 
+{
+    /* For tablets: */
+
+    /* only-overrides */
+    .text-center-only-small
+    {
+      text-align: initial;
+    }
+
+  .center-block-only-small
+  {
+    display: inline;
+  }
+
+}
+
+@media only screen and (min-width: 768px) 
+{
+    /* For desktop: */
+
+    /* center */
+    
 }

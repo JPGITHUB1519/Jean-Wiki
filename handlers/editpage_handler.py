@@ -17,7 +17,7 @@ class EditPageHandler(Handler) :
 			postobj = WikiPostVersion.get_by_id(v_key.id(), parent = ancestor_key)
 		else :
 			# if not exits version edit post
-			postobj = WikiPost.query(ancestor = ancestor_key).filter(WikiPost.url == url).get()
+			postobj = get_wiki_post(url)
 		# if the post exits load the content of the post and assign it to the textarea
 		if postobj :
 			self.render("edit_page.html", post_value = postobj.content)
@@ -37,11 +37,15 @@ class EditPageHandler(Handler) :
 			post_versionobj.put()
 			# adding new post
 			postobj.put()
+			# updating cache after updating
+			get_wiki_post(url, True)
 			self.redirect(url)	
 		else :
 			# if the post do not exit saving post in database
 			postobj = WikiPost(parent = ancestor_key, url = url, content = post)
 			postobj.put()
+			# updating cache after writing
+			get_wiki_post(url, True)
 			# adding a new version of the post
 			post_versionobj = WikiPostVersion(parent = ancestor_key, r_post = postobj.key, content = post)
 			post_versionobj.put()
