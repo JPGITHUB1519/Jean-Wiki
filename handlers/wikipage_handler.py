@@ -36,4 +36,8 @@ class WikiPageHandler(Handler) :
 				self.redirect('/_edit' + url)
 		else :
 			# if the user do not exits only see
-			self.render("wikipage.html", post = post.content, access = False)
+			if post : 
+				self.render("wikipage.html", post = post.content, access = False)
+			else :
+				#if the post do not exits, see the 404 page
+				self.render("404.html")
