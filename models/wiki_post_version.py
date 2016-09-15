@@ -17,15 +17,23 @@ class WikiPostVersion(ndb.Model) :
 	# postobj = objeto
 	# (inner join XD)  
 	# return all the post versions that macht with post
+
+
+	# def get_r_post_relation(self, url, update = False) :
+	# 	logging.error("LIST VERSION QUERY")
+	# 	postobj = get_wiki_post(url)
+	# 	list_version = WikiPostVersion.query().filter(WikiPostVersion.r_post == postobj.key)
+	# 	return list_version
+
+	# cached version, i cannot save list
 	def get_r_post_relation(self, url, update = False) :
-		ancestor_key = ndb.Key("WikiPost", "parents")
+		# ancestor_key = ndb.Key("WikiPost", "parents")
 		sufix = "r"
 		key = sufix + url
 		list_version = memcache.get(key)
 		if not list_version or update :
 			logging.error("LIST VERSION QUERY")
 			postobj = get_wiki_post(url)
-			list_version = WikiPostVersion.query().filter(WikiPostVersion.r_post == postobj.key)
+			list_version = WikiPostVersion.query().filter(WikiPostVersion.r_post == postobj.key).fetch()
 			memcache.set(key, list_version)
 		return list_version
-
